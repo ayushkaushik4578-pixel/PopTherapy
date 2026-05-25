@@ -1,0 +1,1499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>PopZen Universe Ultimate</title>
+
+<style>
+
+/* =========================
+   RESET
+========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+
+    font-family:Arial,sans-serif;
+
+    min-height:100vh;
+
+    overflow-x:hidden;
+
+    color:white;
+
+    position:relative;
+
+    transition:0.5s;
+
+    background:#111827;
+}
+
+/* =========================
+   ANIMATED BACKGROUND
+========================= */
+
+body::before{
+
+    content:"";
+
+    position:fixed;
+
+    width:250%;
+    height:250%;
+
+    top:-70%;
+    left:-70%;
+
+    background:
+    radial-gradient(circle,#ff00cc22 0%,transparent 18%),
+    radial-gradient(circle,#00d9ff22 0%,transparent 18%),
+    radial-gradient(circle,#00ff9922 0%,transparent 18%),
+    radial-gradient(circle,#ffffff11 0%,transparent 15%);
+
+    animation:bgRotate 50s linear infinite;
+
+    z-index:-3;
+}
+
+@keyframes bgRotate{
+
+    from{
+        transform:rotate(0deg);
+    }
+
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+/* =========================
+   FLOATING LIGHTS
+========================= */
+
+.glowOrb{
+
+    position:fixed;
+
+    border-radius:50%;
+
+    filter:blur(50px);
+
+    opacity:0.25;
+
+    z-index:-2;
+
+    animation:floatOrb linear infinite;
+}
+
+@keyframes floatOrb{
+
+    from{
+        transform:translateY(120vh);
+    }
+
+    to{
+        transform:translateY(-120vh)
+        translateX(100px);
+    }
+}
+
+/* =========================
+   FLOAT PARTICLES
+========================= */
+
+.bgParticle{
+
+    position:fixed;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,0.08);
+
+    animation:floatParticle linear infinite;
+
+    z-index:-1;
+}
+
+@keyframes floatParticle{
+
+    from{
+        transform:translateY(110vh);
+    }
+
+    to{
+        transform:translateY(-120vh);
+    }
+}
+
+/* =========================
+   HEADER
+========================= */
+
+header{
+
+    position:sticky;
+
+    top:0;
+
+    z-index:100;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:18px 25px;
+
+    background:rgba(255,255,255,0.05);
+
+    backdrop-filter:blur(18px);
+
+    border-bottom:
+    1px solid rgba(255,255,255,0.08);
+}
+
+.logo{
+
+    font-size:30px;
+
+    font-weight:bold;
+
+    letter-spacing:1px;
+
+    text-shadow:0 0 20px rgba(255,255,255,0.35);
+}
+
+.stats{
+
+    font-size:16px;
+}
+
+/* =========================
+   CONTROLS
+========================= */
+
+.controls{
+
+    display:flex;
+
+    justify-content:center;
+
+    flex-wrap:wrap;
+
+    gap:12px;
+
+    padding:18px;
+}
+
+button,
+select{
+
+    border:none;
+
+    outline:none;
+
+    cursor:pointer;
+
+    padding:12px 18px;
+
+    border-radius:30px;
+
+    color:white;
+
+    font-size:15px;
+
+    background:rgba(255,255,255,0.08);
+
+    backdrop-filter:blur(10px);
+
+    transition:0.25s;
+
+    box-shadow:
+    0 6px 18px rgba(0,0,0,0.25);
+}
+
+button:hover,
+select:hover{
+
+    transform:translateY(-3px) scale(1.03);
+
+    background:rgba(255,255,255,0.15);
+}
+
+/* =========================
+   MAIN LAYOUT
+========================= */
+
+.mainContainer{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:50px;
+
+    padding:40px;
+
+    flex-wrap:wrap;
+}
+
+/* =========================
+   CHARACTER PANEL
+========================= */
+
+.characterPanel{
+
+    width:260px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+}
+
+/* CHARACTER */
+
+.character{
+
+    width:220px;
+    height:220px;
+
+    border-radius:50%;
+
+    position:relative;
+
+    transition:0.2s;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    animation:floatCharacter 3s ease-in-out infinite;
+
+    box-shadow:
+    0 0 45px rgba(255,255,255,0.25);
+}
+
+@keyframes floatCharacter{
+
+    0%{
+        transform:translateY(0px);
+    }
+
+    50%{
+        transform:translateY(-12px);
+    }
+
+    100%{
+        transform:translateY(0px);
+    }
+}
+
+/* EYES */
+
+.eye{
+
+    position:absolute;
+
+    width:18px;
+    height:18px;
+
+    background:white;
+
+    border-radius:50%;
+
+    top:70px;
+}
+
+.eye.left{
+
+    left:70px;
+}
+
+.eye.right{
+
+    right:70px;
+}
+
+/* BLUSH */
+
+.blush{
+
+    position:absolute;
+
+    width:22px;
+    height:10px;
+
+    background:#ff99aa;
+
+    border-radius:50%;
+
+    opacity:0.5;
+
+    top:110px;
+}
+
+.blush.left{
+
+    left:48px;
+}
+
+.blush.right{
+
+    right:48px;
+}
+
+/* MOUTH */
+
+.mouth{
+
+    position:absolute;
+
+    width:55px;
+    height:25px;
+
+    border-bottom:5px solid white;
+
+    border-radius:0 0 50px 50px;
+
+    bottom:55px;
+}
+
+/* CHARACTER NAME */
+
+.characterName{
+
+    margin-top:20px;
+
+    font-size:26px;
+
+    font-weight:bold;
+
+    text-align:center;
+
+    text-shadow:0 0 20px rgba(255,255,255,0.35);
+}
+
+/* CHARACTER EFFECT */
+
+.characterAura{
+
+    position:absolute;
+
+    width:100%;
+    height:100%;
+
+    border-radius:50%;
+
+    border:3px solid rgba(255,255,255,0.2);
+
+    animation:auraPulse 2s infinite;
+}
+
+@keyframes auraPulse{
+
+    0%{
+
+        transform:scale(1);
+
+        opacity:0.8;
+    }
+
+    100%{
+
+        transform:scale(1.3);
+
+        opacity:0;
+    }
+}
+
+/* =========================
+   TOY AREA
+========================= */
+
+#toyArea{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+}
+
+/* =========================
+   POP IT
+========================= */
+
+.popit{
+
+    display:grid;
+
+    grid-template-columns:repeat(6,1fr);
+
+    gap:16px;
+
+    padding:30px;
+
+    border-radius:45px;
+
+    background:
+    rgba(255,255,255,0.08);
+
+    backdrop-filter:blur(18px);
+
+    border:
+    1px solid rgba(255,255,255,0.15);
+
+    box-shadow:
+    inset -10px -10px 20px rgba(255,255,255,0.08),
+    inset 10px 10px 20px rgba(0,0,0,0.25),
+    0 20px 45px rgba(0,0,0,0.35);
+}
+
+/* =========================
+   BUBBLES
+========================= */
+
+.bubble{
+
+    width:72px;
+    height:72px;
+
+    border-radius:50%;
+
+    position:relative;
+
+    overflow:hidden;
+
+    cursor:pointer;
+
+    transition:0.12s;
+
+    border:
+    1px solid rgba(255,255,255,0.15);
+
+    box-shadow:
+    inset -6px -6px 12px rgba(255,255,255,0.25),
+    inset 6px 6px 12px rgba(0,0,0,0.18),
+    0 4px 12px rgba(0,0,0,0.2);
+}
+
+/* GLASS SHINE */
+
+.bubble::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:24px;
+    height:24px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,0.35);
+
+    top:10px;
+    left:10px;
+
+    filter:blur(2px);
+}
+
+/* POPPED */
+
+.bubble.popped{
+
+    animation:popAnim 0.22s ease forwards;
+}
+
+@keyframes popAnim{
+
+    0%{
+        transform:scale(1);
+    }
+
+    30%{
+        transform:scale(0.93);
+    }
+
+    60%{
+        transform:scale(0.88)
+        translateY(5px);
+    }
+
+    100%{
+
+        transform:scale(0.9)
+        translateY(7px);
+
+        box-shadow:
+        inset 8px 8px 16px rgba(0,0,0,0.45),
+        inset -2px -2px 5px rgba(255,255,255,0.08);
+    }
+}
+
+/* =========================
+   RIPPLE
+========================= */
+
+.ripple{
+
+    position:absolute;
+
+    border-radius:50%;
+
+    border:2px solid rgba(255,255,255,0.45);
+
+    animation:ripple 0.7s ease-out forwards;
+}
+
+@keyframes ripple{
+
+    from{
+
+        opacity:1;
+
+        transform:scale(0.2);
+    }
+
+    to{
+
+        opacity:0;
+
+        transform:scale(2.4);
+    }
+}
+
+/* =========================
+   PARTICLES
+========================= */
+
+.popParticle{
+
+    position:absolute;
+
+    width:8px;
+    height:8px;
+
+    border-radius:50%;
+
+    pointer-events:none;
+
+    animation:explode 0.7s ease-out forwards;
+}
+
+@keyframes explode{
+
+    to{
+
+        transform:
+        translate(var(--x),var(--y))
+        scale(0);
+
+        opacity:0;
+    }
+}
+
+/* =========================
+   COMBO TEXT
+========================= */
+
+.comboText{
+
+    position:fixed;
+
+    font-size:32px;
+
+    font-weight:bold;
+
+    pointer-events:none;
+
+    text-shadow:0 0 20px currentColor;
+
+    animation:comboFloat 1s ease-out forwards;
+}
+
+@keyframes comboFloat{
+
+    to{
+
+        transform:
+        translateY(-90px)
+        scale(1.5);
+
+        opacity:0;
+    }
+}
+
+/* =========================
+   CHARACTER EXPLOSION
+========================= */
+
+.characterExplode{
+
+    animation:characterBoom 1s ease forwards !important;
+}
+
+@keyframes characterBoom{
+
+    0%{
+        transform:scale(1);
+    }
+
+    40%{
+        transform:scale(1.5);
+    }
+
+    70%{
+        transform:scale(1.9);
+    }
+
+    100%{
+        transform:scale(0);
+        opacity:0;
+    }
+}
+
+/* =========================
+   THEMES
+========================= */
+
+.soft{
+    background:linear-gradient(#303030,#555);
+}
+
+.ocean{
+    background:linear-gradient(#001f3f,#0074D9);
+}
+
+.sunset{
+    background:linear-gradient(#2b1055,#ff6a00);
+}
+
+.forest{
+    background:linear-gradient(#0b3d2e,#1f6f50);
+}
+
+.cyber{
+    background:linear-gradient(#0f0c29,#302b63,#24243e);
+}
+
+.galaxy{
+    background:linear-gradient(#090979,#3d0066,#000);
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:950px){
+
+    .mainContainer{
+
+        flex-direction:column;
+    }
+
+    .bubble{
+
+        width:54px;
+        height:54px;
+    }
+
+    .popit{
+
+        gap:10px;
+
+        padding:18px;
+    }
+
+    .character{
+
+        width:170px;
+        height:170px;
+    }
+
+    .eye{
+
+        top:52px;
+    }
+
+    .eye.left{
+
+        left:50px;
+    }
+
+    .eye.right{
+
+        right:50px;
+    }
+}
+
+</style>
+</head>
+
+<body class="cyber">
+
+<header>
+
+<div class="logo">
+PopZen Universe
+</div>
+
+<div class="stats">
+
+Pops:
+<span id="score">0</span>
+
+|
+
+Combo:
+<span id="combo">0</span>
+
+|
+
+Time:
+<span id="time">0</span>s
+
+</div>
+
+</header>
+
+<!-- CONTROLS -->
+
+<div class="controls">
+
+<select id="shapeSelector" onchange="changeShape()">
+
+<option value="square">⬛ Square</option>
+<option value="circle">⭕ Circle</option>
+<option value="heart">❤️ Heart</option>
+<option value="hex">⬡ Hex</option>
+
+</select>
+
+<button onclick="resetToy()">🔁 Reset</button>
+
+<button onclick="popAll()">⚡ Pop All</button>
+
+<button onclick="toggleAuto()">🎮 Auto</button>
+
+<button onclick="toggleMusic()">🎵 Music</button>
+
+<button onclick="toggleFullscreen()">🖥 Fullscreen</button>
+
+</div>
+
+<!-- MAIN -->
+
+<div class="mainContainer">
+
+<!-- CHARACTER LEFT -->
+
+<div class="characterPanel">
+
+<div class="character" id="character">
+
+<div class="characterAura"></div>
+
+<div class="eye left"></div>
+<div class="eye right"></div>
+
+<div class="blush left"></div>
+<div class="blush right"></div>
+
+<div class="mouth"></div>
+
+</div>
+
+<div class="characterName" id="characterName">
+Neon Blob
+</div>
+
+</div>
+
+<!-- TOY -->
+
+<div id="toyArea"></div>
+
+</div>
+
+<script>
+
+/* =========================
+   GLOBAL
+========================= */
+
+const toyArea =
+document.getElementById("toyArea");
+
+const character =
+document.getElementById("character");
+
+const characterName =
+document.getElementById("characterName");
+
+let score = 0;
+let combo = 0;
+let time = 0;
+let autoMode = false;
+
+/* =========================
+   CHARACTER THEMES
+========================= */
+
+const characters = [
+
+{
+name:"Neon Blob",
+color:"#ff00cc",
+theme:"cyber"
+},
+
+{
+name:"Galaxy Ghost",
+color:"#00d9ff",
+theme:"galaxy"
+},
+
+{
+name:"Forest Slime",
+color:"#00ff88",
+theme:"forest"
+},
+
+{
+name:"Ocean Jelly",
+color:"#00aaff",
+theme:"ocean"
+},
+
+{
+name:"Sunset Bear",
+color:"#ff8800",
+theme:"sunset"
+},
+
+{
+name:"Soft Cloud",
+color:"#dddddd",
+theme:"soft"
+}
+
+];
+
+function randomCharacter(){
+
+    const c =
+    characters[
+    Math.floor(Math.random()*characters.length)
+    ];
+
+    character.style.background =
+    `radial-gradient(circle at 30% 30%,
+    #ffffff55,
+    ${c.color})`;
+
+    character.style.boxShadow =
+    `0 0 45px ${c.color}`;
+
+    characterName.innerText =
+    c.name;
+
+    document.body.className =
+    c.theme;
+}
+
+randomCharacter();
+
+/* =========================
+   FLOATING PARTICLES
+========================= */
+
+for(let i=0;i<35;i++){
+
+    const p =
+    document.createElement("div");
+
+    p.className = "bgParticle";
+
+    let size =
+    Math.random()*8+4;
+
+    p.style.width = size+"px";
+
+    p.style.height = size+"px";
+
+    p.style.left =
+    Math.random()*100+"vw";
+
+    p.style.animationDuration =
+    Math.random()*18+10+"s";
+
+    p.style.opacity =
+    Math.random()*0.25;
+
+    document.body.appendChild(p);
+}
+
+/* =========================
+   GLOW ORBS
+========================= */
+
+const glowColors = [
+"#ff00cc",
+"#00d9ff",
+"#00ff88",
+"#ff9900"
+];
+
+for(let i=0;i<8;i++){
+
+    const orb =
+    document.createElement("div");
+
+    orb.className = "glowOrb";
+
+    let size =
+    Math.random()*250+120;
+
+    orb.style.width =
+    size+"px";
+
+    orb.style.height =
+    size+"px";
+
+    orb.style.left =
+    Math.random()*100+"vw";
+
+    orb.style.background =
+    glowColors[
+    Math.floor(Math.random()*glowColors.length)
+    ];
+
+    orb.style.animationDuration =
+    Math.random()*25+20+"s";
+
+    document.body.appendChild(orb);
+}
+
+/* =========================
+   AUDIO FIXED
+========================= */
+
+const soundFiles = [
+
+"./sounds/soft-pop.mp3",
+"./sounds/deep-pop.mp3",
+"./sounds/crisp-pop.mp3",
+"./sounds/plastic-tap.mp3"
+
+];
+
+let audioUnlocked = false;
+
+document.body.addEventListener("click",()=>{
+
+    audioUnlocked = true;
+
+},{once:true});
+
+/* =========================
+   MUSIC
+========================= */
+
+let music =
+new Audio(
+"https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8e8e0c4.mp3?filename=ambient-piano-amp-strings-10711.mp3"
+);
+
+music.loop = true;
+
+music.volume = 0.3;
+
+function toggleMusic(){
+
+    if(music.paused){
+
+        music.play().catch(()=>{});
+
+    }else{
+
+        music.pause();
+    }
+}
+
+/* =========================
+   COLORS
+========================= */
+
+const colors = [
+
+"#ff595e",
+"#ff924c",
+"#ffca3a",
+"#8ac926",
+"#1982c4",
+"#6a4c93"
+
+];
+
+/* =========================
+   CREATE BUBBLE
+========================= */
+
+function createBubble(parent,color){
+
+    const bubble =
+    document.createElement("div");
+
+    bubble.className = "bubble";
+
+    bubble.style.background =
+    `linear-gradient(
+    145deg,
+    ${color},
+    rgba(255,255,255,0.15)
+    )`;
+
+    bubble.addEventListener("click",()=>{
+
+        popBubble(bubble);
+    });
+
+    bubble.addEventListener("mouseover",(e)=>{
+
+        if(e.buttons === 1){
+
+            popBubble(bubble);
+        }
+    });
+
+    parent.appendChild(bubble);
+}
+
+/* =========================
+   CREATE TOY
+========================= */
+
+function createToy(shape){
+
+    toyArea.innerHTML = "";
+
+    const popit =
+    document.createElement("div");
+
+    popit.className = "popit";
+
+    for(let r=0;r<6;r++){
+
+        for(let c=0;c<6;c++){
+
+            createBubble(popit,colors[r]);
+        }
+    }
+
+    if(shape === "circle"){
+
+        popit.style.borderRadius = "50%";
+    }
+
+    if(shape === "heart"){
+
+        popit.style.clipPath =
+        "polygon(50% 100%,0 40%,20% 0,50% 20%,80% 0,100% 40%)";
+    }
+
+    if(shape === "hex"){
+
+        popit.style.clipPath =
+        "polygon(25% 0%,75% 0%,100% 50%,75% 100%,25% 100%,0% 50%)";
+    }
+
+    toyArea.appendChild(popit);
+}
+
+/* =========================
+   POP SOUND FUNCTION
+========================= */
+
+function playPopSound(){
+
+    if(!audioUnlocked) return;
+
+    const random =
+    soundFiles[
+    Math.floor(
+    Math.random()*soundFiles.length
+    )
+    ];
+
+    const pop =
+    new Audio(random);
+
+    pop.volume = 0.7;
+
+    pop.play().catch(()=>{});
+}
+
+/* =========================
+   POP BUBBLE
+========================= */
+
+function popBubble(bubble){
+
+    if(
+    bubble.classList.contains("popped")
+    ) return;
+
+    bubble.classList.add("popped");
+
+    playPopSound();
+
+    createRipple(bubble);
+
+    createParticles(bubble);
+
+    score++;
+    combo++;
+
+    document.getElementById("score")
+    .innerText = score;
+
+    document.getElementById("combo")
+    .innerText = combo;
+
+    /* CHARACTER GROW */
+
+    let scale =
+    1 + combo * 0.03;
+
+    character.style.transform =
+    `scale(${scale})`;
+
+    /* SPECIAL EFFECTS */
+
+    if(combo >= 5){
+
+        character.style.filter =
+        "brightness(1.2)";
+    }
+
+    if(combo >= 10){
+
+        character.style.boxShadow =
+        "0 0 90px white";
+    }
+
+    if(combo >= 20){
+
+        character.style.animation =
+        "floatCharacter 0.5s infinite";
+    }
+
+    showComboText(bubble);
+
+    clearTimeout(window.comboTimeout);
+
+    window.comboTimeout =
+    setTimeout(()=>{
+
+        combo = 0;
+
+        document.getElementById("combo")
+        .innerText = 0;
+
+        character.style.transform =
+        "scale(1)";
+
+        character.style.animation =
+        "floatCharacter 3s ease-in-out infinite";
+
+    },1200);
+
+    /* ALL POPPED */
+
+    const remaining =
+    document.querySelectorAll(
+    ".bubble:not(.popped)"
+    );
+
+    if(remaining.length === 0){
+
+        /* PLAY MULTIPLE POPS */
+
+        for(let i=0;i<8;i++){
+
+            setTimeout(()=>{
+
+                playPopSound();
+
+            },i*80);
+        }
+
+        character.classList.add(
+        "characterExplode"
+        );
+
+        setTimeout(()=>{
+
+            character.classList.remove(
+            "characterExplode"
+            );
+
+            character.style.transform =
+            "scale(1)";
+
+            randomCharacter();
+
+            resetToy(false);
+
+        },1100);
+    }
+
+    if(navigator.vibrate){
+
+        navigator.vibrate(10);
+    }
+}
+
+/* =========================
+   RIPPLE
+========================= */
+
+function createRipple(bubble){
+
+    const ripple =
+    document.createElement("div");
+
+    ripple.className = "ripple";
+
+    ripple.style.width = "70px";
+
+    ripple.style.height = "70px";
+
+    ripple.style.left = "0";
+
+    ripple.style.top = "0";
+
+    bubble.appendChild(ripple);
+
+    setTimeout(()=>{
+
+        ripple.remove();
+
+    },700);
+}
+
+/* =========================
+   PARTICLES
+========================= */
+
+function createParticles(bubble){
+
+    const rect =
+    bubble.getBoundingClientRect();
+
+    for(let i=0;i<8;i++){
+
+        const particle =
+        document.createElement("div");
+
+        particle.className =
+        "popParticle";
+
+        particle.style.background =
+        bubble.style.background;
+
+        particle.style.left =
+        rect.left + rect.width/2 + "px";
+
+        particle.style.top =
+        rect.top + rect.height/2 + "px";
+
+        const angle =
+        Math.random()*Math.PI*2;
+
+        const distance =
+        Math.random()*70;
+
+        particle.style.setProperty(
+        "--x",
+        Math.cos(angle)*distance+"px"
+        );
+
+        particle.style.setProperty(
+        "--y",
+        Math.sin(angle)*distance+"px"
+        );
+
+        document.body.appendChild(particle);
+
+        setTimeout(()=>{
+
+            particle.remove();
+
+        },700);
+    }
+}
+
+/* =========================
+   COMBO TEXT
+========================= */
+
+function showComboText(bubble){
+
+    if(combo < 5) return;
+
+    const rect =
+    bubble.getBoundingClientRect();
+
+    const text =
+    document.createElement("div");
+
+    text.className = "comboText";
+
+    text.innerText =
+    combo + "x Combo!";
+
+    text.style.left =
+    rect.left + "px";
+
+    text.style.top =
+    rect.top + "px";
+
+    text.style.color =
+    "#ffffff";
+
+    document.body.appendChild(text);
+
+    setTimeout(()=>{
+
+        text.remove();
+
+    },1000);
+}
+
+/* =========================
+   CONTROLS
+========================= */
+
+function changeShape(){
+
+    const shape =
+    document.getElementById(
+    "shapeSelector"
+    ).value;
+
+    createToy(shape);
+}
+
+function resetToy(resetStats=true){
+
+    if(resetStats){
+
+        score = 0;
+        combo = 0;
+        time = 0;
+
+        document.getElementById("score")
+        .innerText = 0;
+
+        document.getElementById("combo")
+        .innerText = 0;
+
+        document.getElementById("time")
+        .innerText = 0;
+    }
+
+    changeShape();
+}
+
+function popAll(){
+
+    document.querySelectorAll(".bubble")
+    .forEach((bubble,index)=>{
+
+        setTimeout(()=>{
+
+            popBubble(bubble);
+
+        },index*40);
+    });
+}
+
+function toggleAuto(){
+
+    autoMode = !autoMode;
+}
+
+function toggleFullscreen(){
+
+    if(!document.fullscreenElement){
+
+        document.documentElement
+        .requestFullscreen();
+
+    }else{
+
+        document.exitFullscreen();
+    }
+}
+
+/* =========================
+   TIMER
+========================= */
+
+setInterval(()=>{
+
+    time++;
+
+    document.getElementById("time")
+    .innerText = time;
+
+    if(autoMode){
+
+        const bubbles =
+        document.querySelectorAll(
+        ".bubble:not(.popped)"
+        );
+
+        if(bubbles.length > 0){
+
+            const random =
+            bubbles[
+            Math.floor(
+            Math.random()*bubbles.length
+            )
+            ];
+
+            popBubble(random);
+        }
+    }
+
+},900);
+
+/* =========================
+   INIT
+========================= */
+
+createToy("square");
+
+</script>
+
+</body>
+</html>
